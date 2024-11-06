@@ -8,7 +8,7 @@ namespace Kreata.Backend.Controllers
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
-        private IStudentRepo _studentRepo;
+        private readonly IStudentRepo _studentRepo;
 
         public StudentController(IStudentRepo studentRepo)
         {
@@ -16,31 +16,54 @@ namespace Kreata.Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> SelectAllRecordToListAsync()
+        public async Task<IActionResult> GetAllStudents()
         {
-            List<Student>? users = new();
+            List<Student>? students = await _studentRepo.GetAll();
 
-            if (_studentRepo != null)
+            if (students.Any())
             {
-                users = await _studentRepo.GetAll();
-                return Ok(users);
+                return Ok(students);
             }
-            return BadRequest("Az adatok elérhetetlenek!");
-        }
 
+            return NotFound("Nincsenek diákok az adatbázisban.");
+        }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetBy(Guid id)
+        public async Task<IActionResult> GetStudentById(Guid id)
         {
-            Student? entity = new();
-            if (_studentRepo is not null)
+            var student = await _studentRepo.GetBy(id);
+            if (student != null)
             {
-                entity = await _studentRepo.GetBy(id);
-                if (entity != null)
-                    return Ok(entity);
+                return Ok(student);
             }
-            return BadRequest("Az adatok elérhetetlenek!");
+
+            return NotFound("A keresett diák nem található.");
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateStudent(Guid id, [FromBody] Student student)
+        {
+            var updatedStudent = await _studentRepo.UpdateStudent(id, student);
+
+            if (updatedStudent != null)
+            {
+                return Ok(updatedStudent);
+            }
+
+            return BadRequest("A diák frissítése nem sikerült.");
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> PartiallyUpdateStudent(Guid id, [FromBody] Student student)
+        {
+            var updatedStudent = await _studentRepo.PartiallyUpdateStudent(id, student);
+
+            if (updatedStudent != null)
+            {
+                return Ok(updatedStudent);
+            }
+
+            return BadRequest("A diák adatainak részleges frissítése nem sikerült.");
+        }
     }
 }

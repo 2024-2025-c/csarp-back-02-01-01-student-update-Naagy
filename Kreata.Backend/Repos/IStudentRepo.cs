@@ -6,5 +6,7 @@ namespace Kreata.Backend.Repos
     {
         Task<List<Student>> GetAll();
         Task<Student?> GetBy(Guid id);
+        Task<Student?> UpdateStudent(Guid id, Student student);
+        Task<Student?> PartiallyUpdateStudent(Guid id, Student student);
     }
 }

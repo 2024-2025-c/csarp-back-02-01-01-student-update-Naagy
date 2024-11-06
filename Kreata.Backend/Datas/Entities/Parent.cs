@@ -1,43 +1,39 @@
-namespace Kreata.Backend.Datas.Entities
+﻿namespace Kreata.Backend.Datas.Entities
 {
-    public class Teacher
+    public class Parent
     {
-        public Teacher()
+        public Parent()
         {
             Id = Guid.NewGuid();
             FirstName = string.Empty;
             LastName = string.Empty;
-            BirthsDay = new DateTime();
-            IsWoomen = false;
-            IsHeadTeacher = false;
+            BirthsDay = DateTime.MinValue;
+            IsFather = false;  
         }
 
-        public Teacher(string firstName, string lastName, DateTime birthsDay, bool isWoomen, bool isHeadTeacher)
+        public Parent(string firstName, string lastName, DateTime birthsDay, bool isFather)
         {
             Id = Guid.NewGuid();
             FirstName = firstName;
             LastName = lastName;
             BirthsDay = birthsDay;
-            IsWoomen = isWoomen;
-            IsHeadTeacher = isHeadTeacher;
+            IsFather = isFather;
         }
 
-        public Teacher(Guid id, string firstName, string lastName, DateTime birthsDay, bool isWoomen, bool isHeadTeacher)
+        public Parent(Guid id, string firstName, string lastName, DateTime birthsDay, bool isFather)
         {
             Id = id;
             FirstName = firstName;
             LastName = lastName;
             BirthsDay = birthsDay;
-            IsWoomen = isWoomen;
-            IsHeadTeacher = isHeadTeacher;
+            IsFather = isFather;
         }
 
         public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthsDay { get; set; }
-        public bool IsWoomen { get; set; }
-        public bool IsHeadTeacher { get; set; }
+        public bool IsFather { get; set; } 
 
         public override string ToString()
         {

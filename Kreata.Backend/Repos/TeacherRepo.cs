@@ -1,4 +1,3 @@
-
 using Kreata.Backend.Context;
 using Kreata.Backend.Datas.Entities;
 using Kreata.Backend.Repos;
@@ -12,6 +11,7 @@ public class TeacherRepo : ITeacherRepo
     {
         _dbContext = dbContext;
     }
+
     public async Task<List<Teacher>> GetAll()
     {
         return await _dbContext.Teachers.ToListAsync();
