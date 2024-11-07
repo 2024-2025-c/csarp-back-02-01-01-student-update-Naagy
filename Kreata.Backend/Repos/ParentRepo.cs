@@ -13,16 +13,19 @@ namespace Kreata.Backend.Repos
             _dbContext = dbContext;
         }
 
-        // Lekérdezi az összes szülőt
         public async Task<List<Parent>> GetAll()
         {
             return await _dbContext.Parents.ToListAsync();
         }
 
-        // Lekérdezi a szülőt az id alapján
         public async Task<Parent?> GetBy(Guid id)
         {
             return await _dbContext.Parents.FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public Task<Parent?> UpdateStudent(Guid id, Parent parent)
+        {
+            throw new NotImplementedException();
         }
     }
 }

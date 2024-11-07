@@ -53,17 +53,5 @@ namespace Kreata.Backend.Controllers
             return BadRequest("A diák frissítése nem sikerült.");
         }
 
-        [HttpPatch("{id}")]
-        public async Task<IActionResult> PartiallyUpdateStudent(Guid id, [FromBody] Student student)
-        {
-            var updatedStudent = await _studentRepo.PartiallyUpdateStudent(id, student);
-
-            if (updatedStudent != null)
-            {
-                return Ok(updatedStudent);
-            }
-
-            return BadRequest("A diák adatainak részleges frissítése nem sikerült.");
-        }
     }
 }

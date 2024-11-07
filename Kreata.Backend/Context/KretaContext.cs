@@ -7,6 +7,7 @@ namespace Kreata.Backend.Context
     {
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Parent> Parents { get; set; }
 
         public KretaContext(DbContextOptions<KretaContext> options)
             : base(options)

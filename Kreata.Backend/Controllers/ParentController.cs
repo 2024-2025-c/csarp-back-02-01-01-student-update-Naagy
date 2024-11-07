@@ -39,5 +39,18 @@ namespace Kreata.Backend.Controllers
 
             return NotFound("A keresett szülő nem található.");
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateParent(Guid id, [FromBody] Parent parent)
+        {
+            var updatedParent = await _parentRepo.UpdateParent(id, parent);
+
+            if (updatedParent != null)
+            {
+                return Ok(updatedParent);
+            }
+
+            return BadRequest("A diák frissítése nem sikerült.");
+        }
     }
 }

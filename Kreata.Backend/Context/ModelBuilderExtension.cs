@@ -57,6 +57,26 @@ namespace Kreata.Backend.Context
                 }
             };
 
+            List<Parent> parents = new List<Parent>
+            {
+                new Parent
+                {
+                    Id=Guid.NewGuid(),
+                    FirstName="Ferenc",
+                    LastName="Kiss",
+                    BirthsDay=new DateTime(2001,8,1),
+                    IsFather=true,
+                },
+                new Parent
+                {
+                    Id=Guid.NewGuid(),
+                    FirstName="Ágnes",
+                    LastName="Molnár",
+                    BirthsDay=new DateTime(2002,2,24),
+                    IsFather=false,
+                }
+            };
+
             modelBuilder.Entity<Teacher>().HasData(techers);
         }
     }
