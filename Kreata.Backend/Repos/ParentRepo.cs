@@ -23,7 +23,7 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Parents.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public Task<Parent?> UpdateStudent(Guid id, Parent parent)
+        public Task<Parent?> UpdateParent(Guid id, Parent parent)
         {
             throw new NotImplementedException();
         }

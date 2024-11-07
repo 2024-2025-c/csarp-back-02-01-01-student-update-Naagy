@@ -38,4 +38,17 @@ public class TeacherController : ControllerBase
         }
         return BadRequest("Az adatok elérhetetlenek!");
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] Teacher teacher)
+    {
+        var updatedTeacher = await _teacherRepo.UpdateTeacher(id, teacher);
+
+        if (updatedTeacher != null)
+        {
+            return Ok(updatedTeacher);
+        }
+
+        return BadRequest("A tanár frissítése nem sikerült.");
+    }
 }

@@ -57,6 +57,8 @@ namespace Kreata.Backend.Context
                 }
             };
 
+            modelBuilder.Entity<Teacher>().HasData(techers);
+
             List<Parent> parents = new List<Parent>
             {
                 new Parent
@@ -77,7 +79,27 @@ namespace Kreata.Backend.Context
                 }
             };
 
-            modelBuilder.Entity<Teacher>().HasData(techers);
+            modelBuilder.Entity<Parent>().HasData(parents);
+
+            List<Club> clubs = new List<Club>
+            {
+                new Club
+                {
+                    Id=Guid.NewGuid(),
+                    FirstName="Madrid",
+                    LastName="Real",
+                    BirthsDay=new DateTime(1902,3,6),
+                },
+                new Club
+                {
+                    Id=Guid.NewGuid(),
+                    FirstName="United",
+                    LastName="Macnhester",
+                    BirthsDay=new DateTime(1878,2,24),
+                }
+            };
+
+            modelBuilder.Entity<Club>().HasData(clubs);
         }
     }
 }

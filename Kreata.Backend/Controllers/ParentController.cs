@@ -50,7 +50,7 @@ namespace Kreata.Backend.Controllers
                 return Ok(updatedParent);
             }
 
-            return BadRequest("A diák frissítése nem sikerült.");
+            return BadRequest("A szülő frissítése nem sikerült.");
         }
     }
 }
