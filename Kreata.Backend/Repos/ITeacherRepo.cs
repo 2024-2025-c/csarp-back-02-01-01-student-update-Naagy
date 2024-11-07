@@ -5,8 +5,9 @@ namespace Kreata.Backend.Repos
     public interface ITeacherRepo
     {
         Task<List<Teacher>> GetAll();
-        Task<Teacher?> GetBy(Guid id);
-        Task<Teacher?> UpdateTeacher(Guid id, Teacher teacher);
 
+        Task<Teacher?> GetBy(Guid id);
+
+        Task<Teacher?> UpdateTeacher(Guid id, Teacher teacher);
     }
 }

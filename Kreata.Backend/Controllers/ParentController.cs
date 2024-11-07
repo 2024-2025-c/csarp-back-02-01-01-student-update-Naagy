@@ -8,7 +8,7 @@ namespace Kreata.Backend.Controllers
     [Route("api/[controller]")]
     public class ParentController : ControllerBase
     {
-        private IParentRepo _parentRepo;
+        private readonly IParentRepo _parentRepo;
 
         public ParentController(IParentRepo parentRepo)
         {
@@ -52,5 +52,6 @@ namespace Kreata.Backend.Controllers
 
             return BadRequest("A szülő frissítése nem sikerült.");
         }
+
     }
 }

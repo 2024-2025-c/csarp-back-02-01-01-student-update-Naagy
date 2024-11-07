@@ -23,9 +23,21 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Clubs.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public Task<Club?> UpdateClub(Guid id, Club club)
+        public async Task<Club?> UpdateClub(Guid id, Club club)
         {
-            throw new NotImplementedException();
+            var existingClub = await _dbContext.Clubs.FirstOrDefaultAsync(c => c.Id == id);
+            if (existingClub == null)
+            {
+                return null;
+            }
+
+            existingClub.FirstName = club.FirstName;
+            existingClub.LastName = club.LastName;
+            existingClub.BirthsDay = club.BirthsDay;
+
+            await _dbContext.SaveChangesAsync();
+
+            return existingClub;
         }
     }
 }

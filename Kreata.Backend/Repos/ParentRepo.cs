@@ -23,9 +23,22 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Parents.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public Task<Parent?> UpdateParent(Guid id, Parent parent)
+        public async Task<Parent?> UpdateParent(Guid id, Parent parent)
         {
-            throw new NotImplementedException();
+            var existingParent = await _dbContext.Parents.FirstOrDefaultAsync(p => p.Id == id);
+            if (existingParent == null)
+            {
+                return null;
+            }
+
+            existingParent.FirstName = parent.FirstName;
+            existingParent.LastName = parent.LastName;
+            existingParent.BirthsDay = parent.BirthsDay;
+            existingParent.IsFather = parent.IsFather;
+
+            await _dbContext.SaveChangesAsync();
+
+            return existingParent;
         }
     }
 }

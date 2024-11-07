@@ -23,9 +23,25 @@ namespace Kreata.Backend.Repos
             return await _dbContext.Students.FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public Task<Student?> UpdateStudent(Guid id, Student student)
+        public async Task<Student?> UpdateStudent(Guid id, Student student)
         {
-            throw new NotImplementedException();
+            var existingStudent = await _dbContext.Students.FirstOrDefaultAsync(s => s.Id == id);
+            if (existingStudent == null)
+            {
+                return null;
+            }
+
+            existingStudent.FirstName = student.FirstName;
+            existingStudent.LastName = student.LastName;
+            existingStudent.BirthsDay = student.BirthsDay;
+            existingStudent.SchoolYear = student.SchoolYear;
+            existingStudent.SchoolClass = student.SchoolClass;
+            existingStudent.EducationLevel = student.EducationLevel;
+            existingStudent.IsWoomen = student.IsWoomen;
+
+            await _dbContext.SaveChangesAsync();
+
+            return existingStudent;
         }
     }
 }

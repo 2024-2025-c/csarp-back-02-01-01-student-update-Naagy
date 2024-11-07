@@ -4,7 +4,7 @@ namespace Kreata.Backend.Datas.Entities
 {
     public class Student
     {
-        public Student(Guid id, string firstName, string lastName, DateTime birthsDay, int schoolYear, SchoolClassType schoolClass, string educationLevel, bool isWooman)
+        public Student(Guid id, string firstName, string lastName, DateTime birthsDay, int schoolYear, SchoolClassType schoolClass, string educationLevel, bool isWoomen)
         {
             Id = id;
             FirstName = firstName;
@@ -13,10 +13,10 @@ namespace Kreata.Backend.Datas.Entities
             SchoolYear = schoolYear;
             SchoolClass = schoolClass;
             EducationLevel = educationLevel;
-            IsWoomen = isWooman;
+            IsWoomen = isWoomen;
         }
 
-        public Student(string firstName, string lastName, DateTime birthsDay, int schoolYear, SchoolClassType schoolClass, string educationLevel, bool isWooman)
+        public Student(string firstName, string lastName, DateTime birthsDay, int schoolYear, SchoolClassType schoolClass, string educationLevel, bool isWoomen)
         {
             Id = Guid.NewGuid();
             FirstName = firstName;
@@ -25,7 +25,7 @@ namespace Kreata.Backend.Datas.Entities
             SchoolYear = schoolYear;
             SchoolClass = schoolClass;
             EducationLevel = educationLevel;
-            IsWoomen = isWooman;
+            IsWoomen = isWoomen;
         }
 
         public Student()
@@ -41,12 +41,19 @@ namespace Kreata.Backend.Datas.Entities
         }
 
         public Guid Id { get; set; }
+
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
+
         public DateTime BirthsDay { get; set; }
+
         public int SchoolYear { get; set; }
+
         public SchoolClassType SchoolClass { get; set; }
+
         public string EducationLevel { get; set; }
+
         public bool IsWoomen { get; set; }
 
         public override string ToString()

@@ -2,53 +2,56 @@ using Kreata.Backend.Datas.Entities;
 using Kreata.Backend.Repos;
 using Microsoft.AspNetCore.Mvc;
 
-[ApiController]
-[Route("api/[controller]")]
-public class TeacherController : ControllerBase
+namespace Kreata.Backend.Controllers
 {
-    private ITeacherRepo _teacherRepo;
-
-    public TeacherController(ITeacherRepo teacherRepo)
+    [ApiController]
+    [Route("api/[controller]")]
+    public class TeacherController : ControllerBase
     {
-        _teacherRepo = teacherRepo;
-    }
+        private readonly ITeacherRepo _teacherRepo;
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetBy(Guid id)
-    {
-        Teacher? entity = new();
-        if (_teacherRepo is not null)
+        public TeacherController(ITeacherRepo teacherRepo)
         {
-            entity = await _teacherRepo.GetBy(id);
-            if (entity != null)
-                return Ok(entity);
-        }
-        return BadRequest("Az adatok elérhetetlenek!");
-    }
-
-    [HttpGet]
-    public async Task<IActionResult> SelectAllRecordToListAsync()
-    {
-        List<Teacher>? users = new();
-
-        if (_teacherRepo != null)
-        {
-            users = await _teacherRepo.GetAll();
-            return Ok(users);
-        }
-        return BadRequest("Az adatok elérhetetlenek!");
-    }
-
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] Teacher teacher)
-    {
-        var updatedTeacher = await _teacherRepo.UpdateTeacher(id, teacher);
-
-        if (updatedTeacher != null)
-        {
-            return Ok(updatedTeacher);
+            _teacherRepo = teacherRepo;
         }
 
-        return BadRequest("A tanár frissítése nem sikerült.");
+        [HttpGet]
+        public async Task<IActionResult> GetAllTeachers()
+        {
+            List<Teacher>? teachers = await _teacherRepo.GetAll();
+
+            if (teachers.Any())
+            {
+                return Ok(teachers);
+            }
+
+            return NotFound("Nincsenek tanárok az adatbázisban.");
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTeacherById(Guid id)
+        {
+            var teacher = await _teacherRepo.GetBy(id);
+            if (teacher != null)
+            {
+                return Ok(teacher);
+            }
+
+            return NotFound("A keresett tanár nem található.");
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateTeacher(Guid id, [FromBody] Teacher teacher)
+        {
+            var updatedTeacher = await _teacherRepo.UpdateTeacher(id, teacher);
+
+            if (updatedTeacher != null)
+            {
+                return Ok(updatedTeacher);
+            }
+
+            return BadRequest("A tanár frissítése nem sikerült.");
+        }
+
     }
 }
